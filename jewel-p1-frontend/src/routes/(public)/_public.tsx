@@ -8,6 +8,7 @@ export const Route = createFileRoute('/(public)/_public')({
 function PublicLayout() {
   const { data: user, isLoading } = useAuth();
 
+  console.log("user", user);
   if (isLoading) return (
     <div className="flex items-center h-screen justify-center">
       <Loader2 className="size-8 animate-spin" />
