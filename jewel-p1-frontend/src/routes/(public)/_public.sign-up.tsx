@@ -21,12 +21,14 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from '@/components/ui/button';
+import { useSignUp } from '@/features/auth/hooks/use-sign-up';
 
 export const Route = createFileRoute('/(public)/_public/sign-up')({
   component: SignUpPage,
 })
 
 function SignUpPage() {
+  const { mutate: createUser } = useSignUp();
   const form = useForm<SignupSchemaType>({
     resolver: zodResolver(signupSchema),
     defaultValues: {
@@ -36,7 +38,8 @@ function SignUpPage() {
   });
 
   function onSubmit(values: SignupSchemaType) {
-    console.log(values)
+    console.log(values);
+    createUser(values);
   }
 
   return (
