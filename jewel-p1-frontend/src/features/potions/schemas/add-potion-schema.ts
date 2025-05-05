@@ -7,9 +7,9 @@ export const addPotionSchema = z.object({
     category: z.string().min(1, {
         message: "Category is required",
     }), 
-    stock: z.number().min(1, {
-        message: "Stock is required", 
-    }), 
+    stock: z.coerce.number().min(1, {
+        message: "Stock is required",
+    }),
     seller: z.string().min(1, {
         message: "Seller is required",
     }), 
