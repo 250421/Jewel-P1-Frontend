@@ -11,12 +11,9 @@ function Index() {
     return (
         <div className="grid grid-cols-3 gap-4">
             {potions?.map((pot) => (
-                <Link key={pot.id} to="/potion/$potionId" params= {{
-                    potionId: pot.id.toString(),
-                }}>
-                    <PotionItem  potion={pot} />
-                </Link>
+                <PotionItem key={pot.id} potion={pot} />
             ))}
+
 
         </div>
     )
