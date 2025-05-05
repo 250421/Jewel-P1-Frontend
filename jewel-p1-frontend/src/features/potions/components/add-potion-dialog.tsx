@@ -117,7 +117,7 @@ export const AddPotionDialog = ({
                         )}
                     />
 
-                    <Button type="submit">Submit</Button>
+                    <Button type="submit" style={{ color: "#FEFAE0", backgroundColor: "#283618" }}>Submit</Button>
                     </form>
                 </Form>
 
