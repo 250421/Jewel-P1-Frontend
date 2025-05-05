@@ -25,6 +25,17 @@ function PotionIdPage () {
   if (!potion) {
     return <h1>No potion found.</h1>
   }
+
+  return (
+    <div className="flex justify-center h-screen">
+      <div className="w-[300px] rounded-xl p-6 text-center space-y-3">
+        <p className="text-xl font-bold">{potion?.name}</p>
+        <p className="italic">{potion.category} Potion</p>
+        <hr className="border-t" />
+        <p>{potion.stock} potion(s) in stock</p>
+        <p>Seller: {potion.seller}</p>
+      </div>
+    </div>
+  );
   
-  return <div> {potion?.name} </div>;
 }
