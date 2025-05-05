@@ -1,5 +1,6 @@
+import { PotionItem } from '@/features/potions/components/potion-item';
 import { useGetPotions } from '@/features/potions/hooks/use-get-potions';
-import { createFileRoute} from '@tanstack/react-router'
+import { createFileRoute, Link} from '@tanstack/react-router'
 
 export const Route = createFileRoute("/(auth)/_auth/")({
   component: Index,
@@ -8,14 +9,13 @@ export const Route = createFileRoute("/(auth)/_auth/")({
 function Index() {
     const { data: potions } = useGetPotions();
     return (
-        <div>
+        <div className="grid grid-cols-3 gap-4">
             {potions?.map((pot) => (
-                <div key={pot?.id}>
-                    <p>{pot?.name}</p>
-                    <p>{pot?.category}</p>
-                    <p>{pot?.stock}</p>
-                    <p>{pot?.seller}</p>
-                </div>
+                <Link key={pot.id} to="/potion/$potionId" params= {{
+                    potionId: pot.id.toString(),
+                }}>
+                    <PotionItem  potion={pot} />
+                </Link>
             ))}
 
         </div>

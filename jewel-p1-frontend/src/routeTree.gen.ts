@@ -18,6 +18,7 @@ import { Route as authAuthImport } from './routes/(auth)/_auth'
 import { Route as authAuthIndexImport } from './routes/(auth)/_auth.index'
 import { Route as publicPublicSignUpImport } from './routes/(public)/_public.sign-up'
 import { Route as publicPublicSignInImport } from './routes/(public)/_public.sign-in'
+import { Route as authAuthPotionPotionIdImport } from './routes/(auth)/_auth.potion.$potionId'
 
 // Create Virtual Routes
 
@@ -62,6 +63,12 @@ const publicPublicSignInRoute = publicPublicSignInImport.update({
   id: '/sign-in',
   path: '/sign-in',
   getParentRoute: () => publicPublicRoute,
+} as any)
+
+const authAuthPotionPotionIdRoute = authAuthPotionPotionIdImport.update({
+  id: '/potion/$potionId',
+  path: '/potion/$potionId',
+  getParentRoute: () => authAuthRoute,
 } as any)
 
 // Populate the FileRoutesByPath interface
@@ -117,6 +124,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof authAuthIndexImport
       parentRoute: typeof authAuthImport
     }
+    '/(auth)/_auth/potion/$potionId': {
+      id: '/(auth)/_auth/potion/$potionId'
+      path: '/potion/$potionId'
+      fullPath: '/potion/$potionId'
+      preLoaderRoute: typeof authAuthPotionPotionIdImport
+      parentRoute: typeof authAuthImport
+    }
   }
 }
 
@@ -124,10 +138,12 @@ declare module '@tanstack/react-router' {
 
 interface authAuthRouteChildren {
   authAuthIndexRoute: typeof authAuthIndexRoute
+  authAuthPotionPotionIdRoute: typeof authAuthPotionPotionIdRoute
 }
 
 const authAuthRouteChildren: authAuthRouteChildren = {
   authAuthIndexRoute: authAuthIndexRoute,
+  authAuthPotionPotionIdRoute: authAuthPotionPotionIdRoute,
 }
 
 const authAuthRouteWithChildren = authAuthRoute._addFileChildren(
@@ -173,12 +189,14 @@ export interface FileRoutesByFullPath {
   '/': typeof authAuthIndexRoute
   '/sign-in': typeof publicPublicSignInRoute
   '/sign-up': typeof publicPublicSignUpRoute
+  '/potion/$potionId': typeof authAuthPotionPotionIdRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof authAuthIndexRoute
   '/sign-in': typeof publicPublicSignInRoute
   '/sign-up': typeof publicPublicSignUpRoute
+  '/potion/$potionId': typeof authAuthPotionPotionIdRoute
 }
 
 export interface FileRoutesById {
@@ -190,13 +208,14 @@ export interface FileRoutesById {
   '/(public)/_public/sign-in': typeof publicPublicSignInRoute
   '/(public)/_public/sign-up': typeof publicPublicSignUpRoute
   '/(auth)/_auth/': typeof authAuthIndexRoute
+  '/(auth)/_auth/potion/$potionId': typeof authAuthPotionPotionIdRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/sign-in' | '/sign-up'
+  fullPaths: '/' | '/sign-in' | '/sign-up' | '/potion/$potionId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/sign-in' | '/sign-up'
+  to: '/' | '/sign-in' | '/sign-up' | '/potion/$potionId'
   id:
     | '__root__'
     | '/(auth)'
@@ -206,6 +225,7 @@ export interface FileRouteTypes {
     | '/(public)/_public/sign-in'
     | '/(public)/_public/sign-up'
     | '/(auth)/_auth/'
+    | '/(auth)/_auth/potion/$potionId'
   fileRoutesById: FileRoutesById
 }
 
@@ -243,7 +263,8 @@ export const routeTree = rootRoute
       "filePath": "(auth)/_auth.tsx",
       "parent": "/(auth)",
       "children": [
-        "/(auth)/_auth/"
+        "/(auth)/_auth/",
+        "/(auth)/_auth/potion/$potionId"
       ]
     },
     "/(public)": {
@@ -270,6 +291,10 @@ export const routeTree = rootRoute
     },
     "/(auth)/_auth/": {
       "filePath": "(auth)/_auth.index.tsx",
+      "parent": "/(auth)/_auth"
+    },
+    "/(auth)/_auth/potion/$potionId": {
+      "filePath": "(auth)/_auth.potion.$potionId.tsx",
       "parent": "/(auth)/_auth"
     }
   }

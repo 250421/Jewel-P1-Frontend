@@ -24,7 +24,7 @@ function RouteComponent() {
   return (
     <>
       <Navbar />
-      <main className="max-w-screen mx-auto w-11/12">
+      <main className="max-w-screen mx-auto w-11/12 py-10">
         <Outlet />
       </main>
     </>
