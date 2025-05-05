@@ -1,4 +1,3 @@
-import React from 'react'
 import { Potion } from '../models/potion';
 
 interface PotionItemProps {
@@ -11,6 +10,7 @@ export const PotionItem = ({ potion }: PotionItemProps) => {
             <div>
                 <p className="font-bold text-xl capitalize">{potion.name}</p>
                 <p className="italic">{potion.category} Potion</p>
+                <hr className="color-foreground h-2"></hr>
                 <p>{potion.stock} potion(s) in stock</p>
                 <p>Seller: {potion.seller}</p>
             </div>
