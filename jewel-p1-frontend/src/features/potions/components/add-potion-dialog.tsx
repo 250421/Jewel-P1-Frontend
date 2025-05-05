@@ -1,4 +1,3 @@
-import React from 'react'
 import {
     Dialog,
     DialogContent,
@@ -19,7 +18,7 @@ import { Input } from '@/components/ui/input';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { addPotionSchema, AddPotionSchema } from '../schemas/add-potion-schema';
-import { usePotion } from '../hooks/use-add-potion';
+import { useAddPotion } from "../hooks/use-add-potion";
   
 interface AddPotionDialogProps {
     open: boolean;
@@ -30,7 +29,7 @@ export const AddPotionDialog = ({
         open, 
         setOpen, 
     }: AddPotionDialogProps) => {
-        const { mutate: addPotion } = usePotion();
+        const { mutate: addPotion } = useAddPotion();
 
         const form = useForm<AddPotionSchema>({
             resolver: zodResolver(addPotionSchema),

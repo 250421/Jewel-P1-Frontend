@@ -1,10 +1,11 @@
 import { axiosInstance } from "@/lib/axios-config";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { AddPotionSchema } from "../schemas/add-potion-schema";
 import { AxiosError } from "axios";
 import { toast } from "sonner";
 
-export const usePotion = () => {
+export const useAddPotion = () => {
+    const queryClient = useQueryClient();
     return useMutation({
         mutationFn: async (values: AddPotionSchema) => {
             const resp = await axiosInstance.post("/potions", values);
@@ -12,6 +13,9 @@ export const usePotion = () => {
         },
         onSuccess: () => {
             toast.success("Potion added");
+            queryClient.invalidateQueries({
+                queryKey: ["potions"], 
+            });
         },
         onError: (error) => {
             console.error(error);

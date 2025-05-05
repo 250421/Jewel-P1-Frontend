@@ -1,3 +1,4 @@
+import { useGetPotions } from '@/features/potions/hooks/use-get-potions';
 import { createFileRoute} from '@tanstack/react-router'
 
 export const Route = createFileRoute("/(auth)/_auth/")({
@@ -5,10 +6,22 @@ export const Route = createFileRoute("/(auth)/_auth/")({
 })
 
 function Index() {
-    
+    const { data: potions } = useGetPotions();
     return (
         <div>
-            <h3>Welcome Home!</h3>
+            {potions?.map((pot) => (
+                <div key={pot?.id}>
+                    <p>{pot?.name}</p>
+                    <p>{pot?.category}</p>
+                    <p>{pot?.stock}</p>
+                    <p>{pot?.seller}</p>
+                </div>
+            ))}
+
         </div>
     )
+}
+
+function useAddPotion(): { data: any; } {
+    throw new Error('Function not implemented.');
 }
